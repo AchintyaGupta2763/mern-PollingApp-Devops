@@ -29,4 +29,18 @@ app.use("/api/v1/poll", pollRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 5000;
+
+app.get("/api/health", async (req, res) => {
+  try {
+    const dbState = require('mongoose').connection.readyState;
+    if (dbState === 1) {
+      res.status(200).send('Healthy: Connected to MongoDB');
+    } else {
+      res.status(500).send('Unhealthy: No DB connection');
+    }
+  } catch (err) {
+    res.status(500).send('Unhealthy: Error checking DB');
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

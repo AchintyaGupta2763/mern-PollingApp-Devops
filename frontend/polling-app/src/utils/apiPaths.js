@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:5000";
+export const BASE_URL = "http://mern-app-alb-2127369331.us-east-1.elb.amazonaws.com";
 
 // utils/apiPaths.js
 export const API_PATHS = {
